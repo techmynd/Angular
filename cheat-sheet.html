@@ -243,11 +243,17 @@ import {FormsModule} from '@angular/forms';
           <h3>Directives / if-else / Loops / Switch / Style / Class</h3>
           <div class="form-group">
             <textarea class="form-control">
+// *ngIf is Structural Directive
 <section *ngIf="showSection"></section>
 <li *ngFor="let item of list"></li>
 <div [ngClass]="{'active': isActive, 'disabled': isDisabled}"></div>
 <div [ngStyle]="{'property': 'value'}"></div>
 <div [ngStyle]="dynamicStyles()"></div>
+// or
+<div *ngIf="status; else notActive">{{ name }}</div>
+<ng-template #notActive>
+ <p>Not Active</p> 
+</ng-template>
             </textarea>
           </div>
         </div>
@@ -268,39 +274,138 @@ ngOnDestroy() { ... }
           </div>
         </div>
         <div class="col-lg-4">
-          <h3>Title</h3>
+          <h3>Loop</h3>
           <div class="form-group">
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control">
+constructor(){
+  this.posts = [
+    {title: 'Post 1'},
+    {title: 'Post 2'},
+    {title: 'Post 3'},
+    {title: 'Post 4'}
+  ];
+}
+// and 
+<ul>
+  <li *ngFor="let post of posts; let i = index">
+    {{ i + 1 }} {{ post.title }}
+  </li>
+</ul>
+            </textarea>
           </div>
         </div>
         <div class="col-lg-4">
-          <h3>Title</h3>
+          <h3>Styles / Classes</h3>
           <div class="form-group">
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control">
+<div [ngStyle]="{color: status ? 'green' : 'red' }">{{ someThingHere }}</div>
+// or
+<div [ngStyle]="{display: isActive ? 'block' : 'none' }">Something here...</div>
+// or if status is true apply class green
+<div [ngClass]="{green: status}">Something here...</div>
+// or
+<div [ngClass]="{isActive: status}">Something here...</div>
+            </textarea>
           </div>
         </div>
         <div class="col-lg-4">
-          <h3>Title</h3>
+          <h3>Bootstrap</h3>
           <div class="form-group">
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control">
+> npm install bootstrap
+-----------------------
+in > .angular-cli.json
+--------------------
+"styles": [
+   "styles.css",
+   "node_modules/bootstrap/dist/css/bootstrap.min.css"
+]
+            </textarea>
           </div>
         </div>
         <div class="col-lg-4">
-          <h3>Title</h3>
+          <h3>Form Submission</h3>
           <div class="form-group">
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control">
+// import Forms module in the app.module.ts and then 
+import { FormsModule } from '@angular/forms';
+// add module in imports in same file 
+imports: [BrowserModule, FormsModule],
+
+// also in app.component.html
+import {NgForm} from '@angular/forms';
+
+submitForm(theForm: NgForm) {
+  // submitted
+  console.log(theForm);
+}
+
+// theForm is reference to this form
+<form (ngSubmit)="submitForm(theForm)" #theForm>... form fields ...</form>
+            </textarea>
           </div>
         </div>
         <div class="col-lg-4">
-          <h3>Title</h3>
+          <h3>Form Get Values</h3>
           <div class="form-group">
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control">
+// import Forms module in the app.module.ts and then 
+import { FormsModule } from '@angular/forms';
+// add module in imports in same file 
+imports: [BrowserModule, FormsModule],
+
+// also in app.component.html
+import {NgForm} from '@angular/forms';
+
+submitForm(theForm: NgForm) {
+  // submitted
+  console.log(theForm.value.firstname);
+  console.log(theForm.value.lastname);
+}
+
+// theForm is reference to this form
+// use ngModel to access form field values
+<form (ngSubmit)="submitForm(theForm)" #theForm="ngForm">
+  <input ngModel type="text" name="firstname" id="firstname">
+  <input ngModel type="text" name="lastname" id="lastname">
+</form>
+            </textarea>
           </div>
         </div>
         <div class="col-lg-4">
-          <h3>Title</h3>
+          <h3>Binding Form Values</h3>
           <div class="form-group">
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control">
+// import Forms module in the app.module.ts and then 
+import { FormsModule } from '@angular/forms';
+// add module in imports in same file 
+imports: [BrowserModule, FormsModule],
+
+// also in app.component.html
+import {NgForm} from '@angular/forms';
+
+export class AppComponent {
+  user = {
+    firstname: '',
+    lastname: '',
+  }
+}
+
+submitForm(theForm: NgForm){
+  // submitted
+  this.user.firstname = theForm.value.firstname;
+  this.user.lastname = theForm.value.lastname;
+  console.log(this.user);
+  // now this.user is an object with values from form
+}
+
+// theForm is reference to this form
+// use ngModel to access form field values
+<form (ngSubmit)="submitForm(theForm)" #theForm="ngForm">
+  <input ngModel type="text" name="firstname">
+  <input ngModel type="text" name="lastname">
+</form>              
+            </textarea>
           </div>
         </div>
         <div class="col-lg-4">
