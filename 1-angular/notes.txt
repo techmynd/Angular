@@ -1,0 +1,24 @@
+
+1- install angular cli globally
+> npm install -g @angular/cli
+
+2- create ng app
+> ng new project-name
+or
+> ng new demo
+
+3- fire up project
+> ng serve
+
+http://localhost:4200/
+
+4- create component
+> ng g c components/example2
+
+
+skip testing file in component creation
+> ng g c components/example3 --spec false
+
+
+
+
