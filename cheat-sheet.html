@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Template</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!--[if lt IE 9]>
+      <script
+        src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"
+        defer
+      ></script>
+      <script
+        src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"
+        defer
+      ></script>
+    <![endif]-->
+    <style>
+      textarea {
+        min-height: 250px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="text-center">Angular Cheat Sheets</h2>
+          <ul>
+            <li>
+              <a href="https://angular.io/guide/cheatsheet" target="_blank"
+                >https://angular.io/guide/cheatsheet</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://malcoded.com/angular-cheat-sheet/"
+                target="_blank"
+                >https://malcoded.com/angular-cheat-sheet/</a
+              >
+            </li>
+            <li>
+              <a
+                href="http://a2.hubwiz.com/docs/ts/latest/guide/cheatsheet.html"
+                target="_blank"
+                >http://a2.hubwiz.com/docs/ts/latest/guide/cheatsheet.html</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.educba.com/angular-2-cheat-sheet/"
+                target="_blank"
+                >https://www.educba.com/angular-2-cheat-sheet/</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://subscription.packtpub.com/book/web_development/9781788299572/1/ch01lvl1sec10/angular-cheat-sheet-overview-of-key-concepts"
+                target="_blank"
+                >https://subscription.packtpub.com/book/web_development/9781788299572/1/ch01lvl1sec10/angular-cheat-sheet-overview-of-key-concepts</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h3>Setup / Run</h3>
+          <div class="form-group">
+            <textarea class="form-control">
+  1- install angular cli globally
+  > npm install -g @angular/cli
+  
+  2- create ng app
+  > ng new project-name
+  or
+  > ng new demo
+  
+  3- fire up project
+  > ng serve
+  http://localhost:4200/
+  
+  4- create component
+  > ng g c components/example2
+  
+  skip testing file in component creation
+  > ng g c components/example3 --spec false              
+              </textarea
+            >
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>app.component.ts</h3>
+          <div class="form-group">
+            <textarea class="form-control">
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'demo';
+}
+</textarea
+            >
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <h3>Component</h3>
+          <div class="form-group">
+            <textarea class="form-control">
+// example.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'example-component',
+  template: `
+    <h2>This is example component</h2>
+  `,
+  //templateUrl: './example.component.html',
+  //styleUrls: ['./example.component.css'],
+})
+export class ExampleComponent {
+  title = 'Example';
+}
+
+// call it in app.component.html or in any other html
+<example-component></example-component>
+            </textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>app.module.ts // register components in app</h3>
+          <div class="form-group">
+            <textarea class="form-control">
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+// import components
+import { AppComponent } from './app.component';
+import { ExampleComponent } from './components/example.component';
+import { Example2Component } from './components/example2/example2.component';
+
+@NgModule({
+  // register components
+  declarations: [AppComponent, ExampleComponent, Example2Component],
+  imports: [BrowserModule],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+            </textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Class / Constructor / Methods</h3>
+          <div class="form-group">
+            <textarea class="form-control">
+export class AppComponent {
+  title: 'app';
+  firstName: 'Javed';
+  lastName: 'Khalil';
+  status: boolean;
+
+  constructor(){
+    this.getUserStatus();
+  }
+
+  displayFirstName(){
+    return this.firstName;
+  }
+
+  getUserStatus(){
+    this.status = false;
+  }
+
+}
+            </textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Method / Function Call</h3>
+          <div class="form-group">
+            <textarea class="form-control">
+<button (click)="getUserStatus()">Get User Status</button>
+<button (mouseover)="getUserStatus()">Get User Status</button>
+<button (keydown)="getUserStatus()">Get User Status</button>
+<input (keydown)="saveState()" type="text">
+            </textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Two Way Binding</h3>
+          <div class="form-group">
+            <textarea class="form-control">
+// lastName is a property
+// we are binding to that property
+// use this in html
+<input [(ngModel)]="lastName" type="text">
+
+// add pakckage on modules
+import {FormsModule} from '@angular/forms';
+// add FormsModule into imports in app.module.ts 
+
+// now if you have lastName property and value in your constructor, it will be bound to that input
+
+            </textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Interpolated String / One Way Binding / Property Binding</h3>
+          <div class="form-group">
+            <textarea class="form-control">
+// from constructor
+<div>Hello {{ firstName }} {{ lastName }}"></div>
+
+// or
+// Property Binding
+<input [value]="firstName" type="text">
+<div [attr.role]="myAriaRole"></div>
+<div [class.extra-sparkle]="isDelightful"></div>
+<div [style.width.px]="mySize"></div>
+
+// event binding
+<input [value]="name" 
+(input)="name = $event.target.value" />
+
+            </textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Directives / if-else / Loops / Switch / Style / Class</h3>
+          <div class="form-group">
+            <textarea class="form-control">
+<section *ngIf="showSection"></section>
+<li *ngFor="let item of list"></li>
+<div [ngClass]="{'active': isActive, 'disabled': isDisabled}"></div>
+<div [ngStyle]="{'property': 'value'}"></div>
+<div [ngStyle]="dynamicStyles()"></div>
+            </textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Lifecycle Hooks</h3>
+          <div class="form-group">
+            <textarea class="form-control">
+constructor(myService: MyService, ...) { ... }
+ngOnChanges(changeRecord) { ... }
+ngOnInit() { ... }
+ngDoCheck() { ... }
+ngAfterContentInit() { ... }
+ngAfterContentChecked() { ... }
+ngAfterViewInit() { ... }
+ngAfterViewChecked() { ... }
+ngOnDestroy() { ... }
+            </textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h3>Title</h3>
+          <div class="form-group">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
