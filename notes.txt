@@ -1,5 +1,6 @@
 > ng version
 
+
 1- install angular cli globally
 > npm install -g @angular/cli
 
@@ -19,7 +20,4 @@ http://localhost:4200/
 
 skip testing file in component creation
 > ng g c components/example3 --spec false
-
-
-
 
